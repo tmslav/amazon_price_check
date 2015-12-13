@@ -1,0 +1,56 @@
+    th{
+        color: rgb(255, 253, 254);
+        background-color: rgb(53, 53, 53);
+        font-family:'Consolas', 'Monaco', 'Bitstream Vera Sans Mono', monospace;
+        font-weight: bolder;
+    }
+    td {
+        color: rgb(0, 164, 255);
+        background-color: rgb(40, 40, 40);
+        font-family:'Consolas', 'Monaco', 'Bitstream Vera Sans Mono', monospace;
+        font-size: 70%;
+    }
+    .container {
+        padding-top: 5%;
+        min-width: 90%;
+    }
+    .table-curved {
+        cursor: pointer;
+        border-collapse: separate;
+        border: solid #000000 1px;
+        border-radius: 6px;
+        border-left: 0px;
+        border-top: 0px;
+}
+.table-curved > thead:first-child > tr:first-child > th {
+        border-bottom: 1px;
+        border-top: solid #8e7d7d 1px;
+}
+.table-curved td, .table-curved th {
+        border-left: 0px solid #ccc;
+        border-top: 2px solid #8E7D7D;
+}
+.table-curved > :first-child > :first-child > :first-child {
+        border-radius: 6px 0 0 0;
+}
+.table-curved > :first-child > :first-child > :last-child {
+        border-radius: 0 6px 0 0;
+}
+.table-curved > :last-child > :last-child > :first-child {
+        border-radius: 0 0 0 6px;
+}
+.table-curved > :last-child > :last-child > :last-child {
+        border-radius: 0 0 6px 0;
+}
+.navbar-default
+{
+    background: #353C5A !important;
+    border: 1px solid black !important;
+}
+.navbar-nav a{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgba(255, 255, 255, 0.73) !important;
+}
+.active > a{
+    background: rgba(231, 231, 231, 0.16) !important;
+}

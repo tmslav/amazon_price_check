@@ -1,0 +1,13 @@
+<div class="container" style="padding-left:5%" ng-controller="settingController">
+    <table class="table-curved" style="min-width: 100%">
+        <thead>
+        <th style="cursor:default; padding-left:1%"><h4>Settings</h4></th>
+        </thead>
+        <tr style="font-size: large;" ng-repeat="(key,value) in settings">
+            <td style="padding-left:5%;padding-right: 5%;padding-bottom: 1%" >
+                {{ key }}:<input ng-change="change(this,settings)" ng-model='selectedTd'  placeholder="{{ value }}"></input>
+            </td>
+        </tr>
+    </table>
+    <button class="btn" ng-click="click(settings)" style="min-width: 100%;background:rgb(50, 60, 91);color:white;font-family: Monaco">Save settings</button>
+</div>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="static/css/normalize.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/app.css"/>
+
+    <link rel="stylesheet" href="static/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="static/bower_components/bootstrap/dist/css/bootstrap-theme.min.css"/>
+    <!--
+    Angular setup
+    -->
+
+    <script src="static/bower_components/angular/angular.js"></script>
+    <script src="static/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="static/bower_components/angular-route/angular-route.js"></script>
+    <script src="static/controller/myapp.js"></script>
+</head>
+<style type="text/css">
+            body, html {
+                height: 100%;
+                overflow: hidden;
+            }
+
+            .navbar-inner {
+                height: 40px;
+            }
+
+            .scrollable {
+                height: 100%;
+                overflow: auto;
+            }
+
+            .max-height {
+                height: 100%;
+            }
+
+            .no-overflow {
+                overflow: hidden;
+            }
+
+            .pad40-top {
+                padding-top: 40px;
+            }
+    </style>
+
+<body style="overflow: auto !important;">
+<nav class="navbar navbar-bottom navbar-fixed-top navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header"></div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li id="home"><a href="/#/">Home</a></li>
+                <li id="settings"><a href="/#/settings">Settings</a></li>
+                <li id="loadproducts"><a href="/#/loadproducts">Load products</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div ng-view class="view-animate" ></div>
+</div>
+<script src="static/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="static/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (location.hash == '#/') {
+            $("#home").addClass("active");
+            $("#settings").removeClass("active");
+            $("#loadproducts").removeClass("active")
+        }
+        else if (location.hash == "#/settings") {
+            $("#settings").addClass("active");
+            $("#home").removeClass("active");
+            $("#loadproducts").removeClass("active")
+        } else if (location.hash == "#/loadproducts") {
+            $("#loadproducts").addClass("active");
+            $("#home").removeClass("active")
+            $("#settings").removeClass("active");
+        }
+    });
+    $(".nav a").on("click", function () {
+        $(".nav").find(".active").removeClass("active");
+        $(this).parent().addClass("active");
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<table class="table-curved table table-responsive table-condensed" style="margin-bottom:0.1%">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Old Price</th>
+                <th>Percent</th>
+                <th>URL</th>
+                <th>Updated</th>
+                <th></th>
+            </tr>
+            </thead>
+            <div><input ng-model="searchText.$" placeholder="Search" style="color:white;font-family:'Open Sans', sans-serif;margin-bottom: 2%"></div>
+            <tbody ng-controller="listsController">
+            <tr ng-repeat="i in lists|filter:searchText" >
+                 <td ng-click="click(i)">{{ i.name|limitTo:30}}{{ i.name.length>30 ? '...' : '' }}</td>
+                 <td ng-click="click(i)">{{i.new_price != -1 ? '$'+i.new_price : "no price"}}</td>
+                 <td ng-click="click(i)">{{ i.old_price != -1 ? '$'+i.old_price:'no price'}}</td>
+                 <td ng-click="click(i)">{{ i.percent }} %</td>
+                 <td ng-click="click(i)">{{ i.updated }}</td>
+                 <td ><a target="_blank" href="{{ i.url }}">{{ i.url|limitTo:30}}{{ i.url.length>30 ? '...' : '' }}</a></td>
+                 <td ng-click="click_x($index,i);">X</td>
+            </tr>
+            </tbody>
+        </table>
+        <a ng-href="#/add"><button class="btn" style="min-width: 100%;max-width: 100%;background: #282828;color: darkkhaki;" ng-href="#/add">+</button></a>

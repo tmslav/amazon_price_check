@@ -1,0 +1,18 @@
+<form class="form">
+    <div class="container" >
+        <table ng-controller="loadProductsController" class="table table-curved" style="max-width: 100% !important;">
+            <thead>
+                <th>Load from asins</th>
+                <th>Load from urls</th>
+            </thead>
+            <tr>
+                <td><textarea ng-model='asins' rows="20" style="min-height: 100%;min-width: 100%;background:inherit"></textarea></td>
+                <td><textarea ng-model='urls' rows="20" style="min-height: 100%;min-width: 100%;background:inherit"></textarea></td>
+            </tr>
+            <tr>
+                <td><button class="btn-info" ng-click="click(this,'asins')" style="min-width: 100%;background:rgb(50, 60, 91);color:white;font-family: Monaco">Load from asin</button></td>
+                <td><button class="btn-info" ng-click="click(this,'urls')" style="min-width: 100%;background:rgb(50, 60, 91);color:white;font-family: Monaco">Load from url</button></td>
+            </tr>
+        </table>
+    </div>
+</form>
