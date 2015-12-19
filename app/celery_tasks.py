@@ -116,12 +116,7 @@ def send_email():
         i.update_all()
 
     if items.count()>0:
-        username = pd.Email_username
-        password = pd.Email_password
-        import ipdb;ipdb.set_trace()
-        server = smtplib.SMTP('smtp.gmail.com',587)
+        server = smtplib.SMTP('localhost')
         server.ehlo()
-        server.starttls()
-        server.login(username,password)
         server.sendmail(fromaddr, toaddrs, msg)
         server.quit()
