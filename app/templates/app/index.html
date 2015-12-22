@@ -16,6 +16,8 @@
     <script src="static/bower_components/angular/angular.js"></script>
     <script src="static/bower_components/angular-resource/angular-resource.js"></script>
     <script src="static/bower_components/angular-route/angular-route.js"></script>
+    <script src="static/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="static/bower_components/ng-csv/build/ng-csv.js"></script>
     <script src="static/controller/myapp.js"></script>
 </head>
 <style type="text/css">
@@ -46,8 +48,8 @@
             }
     </style>
 
-<body style="overflow: auto !important;">
-<nav class="navbar navbar-bottom navbar-fixed-top navbar-default">
+<body style="overflow: auto !important;" ng-controller="listsController">
+<nav class="navbar navbar-bottom navbar-default">
     <div class="container-fluid">
         <div class="navbar-header"></div>
         <div>
@@ -55,12 +57,13 @@
                 <li id="home"><a href="/#/">Home</a></li>
                 <li id="settings"><a href="/#/settings">Settings</a></li>
                 <li id="loadproducts"><a href="/#/loadproducts">Load products</a></li>
+                <li id="download_csv"><a ng-csv="get_csv(filterd)" csv-header="get_header()" filename="{% raw %} {{ get_filename() }} {% endraw %}" href="#/">Download as CSV</a> </li>
             </ul>
         </div>
     </div>
 </nav>
 <div class="container">
-    <div ng-view class="view-animate" ></div>
+    <div ng-view class="view-animate"></div>
 </div>
 <script src="static/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="static/bower_components/bootstrap/dist/js/bootstrap.js"></script>

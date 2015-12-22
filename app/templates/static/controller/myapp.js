@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp',['ngResource','ngRoute','ng']);
+var myApp = angular.module('myApp',['ngResource','ngRoute','ng','ngSanitize','ngCsv']);
 
 myApp.factory('listItems',['$resource',function($resource){
     return $resource('api',{},{
@@ -55,6 +55,7 @@ myApp.controller("listsController",["$scope",'$route',"$resource","$location","l
         var self = this;
         self.lists = $scope.lists = [];
         self.Items = Items;
+        self.$scope = $scope;
         listItems.query(function (data) {
             for (i=0;i<data.length;i++){
                     self.lists.push(data[i]);
@@ -68,7 +69,32 @@ myApp.controller("listsController",["$scope",'$route',"$resource","$location","l
             self.lists.splice(index,1);
             Items.remove({id:item.id});
 
+        };
+        $scope.get_header = function(){
+            return ["Name","New Price","Percent","Old Price","Updated","Url"]
+        };
+
+        $scope.get_filename = function(){
+            return "products_"+
+                   new Date().toLocaleDateString().split("/").join("_")+
+                   new Date().toLocaleTimeString().split(":").join("-").split(" ")[0]+".csv"
+        };
+
+        $scope.get_csv = function(filtered){
+            ret = []
+            for (i = 0; i<self.lists.length;i++){
+                ret.push({
+                    "Name":self.lists[i].name,
+                    "New Price":self.lists[i].new_price,
+                    "Percent":self.lists[i].percent,
+                    "Old Price":self.lists[i].old_price,
+                    "Updated":self.lists[i].updated,
+                    "Url":self.lists[i].url
+                })
+            }
+            return ret;
         }
+
 }]);
 
 myApp.controller("itemController",['$scope','$resource','$routeParams','Items',
@@ -114,10 +140,10 @@ myApp.controller("addItemController",['$scope','listItems',
 myApp.controller("settingController",["$scope","SettingsResource",function($scope,SettingsResource){
      var that = this;
      that.settings = $scope.settings = {
+         "Username":"",
+         "Password":"",
+         "Percent":"",
         "Send to":"",
-        "Send from":"",
-        "Email username":"",
-        "Email password":"",
         "Amazon user":"",
         "Access key ID":"",
         "Secret Access key":""
@@ -125,12 +151,12 @@ myApp.controller("settingController",["$scope","SettingsResource",function($scop
 
     that.keys = [
         "Send to",
-        "Send from",
-        "Email username",
-        "Email password",
         "Amazon user",
         "Access key ID",
-        "Secret Access key"
+        "Secret Access key",
+        "Percent",
+        "Username",
+        "Password"
     ];
 
     SettingsResource.get({},function(settings){

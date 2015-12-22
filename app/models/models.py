@@ -9,12 +9,13 @@ from sqlalchemy.sql import func
 class Settings(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     Send_to = db.Column(db.String(200))
-    Email_password  = db.Column(db.String(200))
     Amazon_user = db.Column(db.String(200))
     Secret_Access_key = db.Column(db.String(200))
-    Send_from = db.Column(db.String(200))
     Access_key_ID = db.Column(db.String(200))
-    Email_username = db.Column(db.String(200))
+    Username = db.Column(db.String(100))
+    Percent = db.Column(db.String(100))
+    Password = db.Column(db.String(100))
+
 
     def __init__(self,**kwargs):
         for k,v in kwargs.iteritems():

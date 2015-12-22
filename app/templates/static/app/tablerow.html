@@ -11,8 +11,8 @@
             </tr>
             </thead>
             <div><input ng-model="searchText.$" placeholder="Search" style="color:white;font-family:'Open Sans', sans-serif;margin-bottom: 2%"></div>
-            <tbody ng-controller="listsController">
-            <tr ng-repeat="i in lists|filter:searchText" >
+            <tbody >
+            <tr ng-repeat="i in (filterItems = (lists|filter:searchText))" >
                  <td ng-click="click(i)">{{ i.name|limitTo:30}}{{ i.name.length>30 ? '...' : '' }}</td>
                  <td ng-click="click(i)">{{i.new_price != -1 ? '$'+i.new_price : "no price"}}</td>
                  <td ng-click="click(i)">{{ i.old_price != -1 ? '$'+i.old_price:'no price'}}</td>
