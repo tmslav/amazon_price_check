@@ -103,20 +103,24 @@ def update_listing():
 @periodic_task(run_every=timedelta(seconds=5))
 def send_email():
     import smtplib
-
     pd = Settings.query.all()[-1]
-    items = Item.query.filter(Item.percent>-5 ).filter_by(email_notify=0)
-    fromaddr = pd.Email_username
+    items = Item.query.filter_by(email_notify=0)
+    fromaddr = 'no-reply@162.243.60.11'
     toaddrs  = pd.Send_to
+    if items:
+	    if pd.Percent.isdigit():
+		percent = int(pd.Percent)
+	    else:
+		percent = 5
+	    msg ="Hello,\n"
+	    for i in items:
+		if abs(i.percent)>percent:
+			msg += 'Item {} has changed his price from {} to {}. \n'.format(i.url,i.old_price,i.new_price)
+			i.email_notify = 1
+			i.update_all()
 
-    msg ="Hello,\n"
-    for i in items:
-        msg += 'Item {} has changed his price from {} to {}. \n'.format(i.url,i.old_price,i.new_price)
-        i.email_notify = 1
-        i.update_all()
-
-    if items.count()>0:
-        server = smtplib.SMTP('localhost')
-        server.ehlo()
-        server.sendmail(fromaddr, toaddrs, msg)
-        server.quit()
+	    if msg!="Hello,\n":
+		server = smtplib.SMTP('localhost')
+		server.ehlo()
+		server.sendmail(fromaddr, toaddrs, msg)
+		server.quit()

@@ -16,7 +16,7 @@
                  <td ng-click="click(i)">{{ i.name|limitTo:30}}{{ i.name.length>30 ? '...' : '' }}</td>
                  <td ng-click="click(i)">{{i.new_price != -1 ? '$'+i.new_price : "no price"}}</td>
                  <td ng-click="click(i)">{{ i.old_price != -1 ? '$'+i.old_price:'no price'}}</td>
-                 <td ng-click="click(i)">{{ i.percent }} %</td>
+                 <td ng-click="click(i)">{{ i.old_price !=-1 && i.new_price!=-1 ? i.percent+"%" : "unknown"  }}</td>
                  <td ng-click="click(i)">{{ i.updated }}</td>
                  <td ><a target="_blank" href="{{ i.url }}">{{ i.url|limitTo:30}}{{ i.url.length>30 ? '...' : '' }}</a></td>
                  <td ng-click="click_x($index,i);">X</td>

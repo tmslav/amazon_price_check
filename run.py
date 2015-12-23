@@ -3,11 +3,18 @@ __author__ = 'tomislav'
 from flask import render_template,request,session,redirect,url_for,send_from_directory
 from app.api_resource import ItemResource,ItemResourceList,SettingsResource, AddAsinsResource, AddUrlsResource
 
+from app.models import Settings
+
 
 from app import api,app
+load_settings = Settings.query.all()
 
-USERNAME = 'test'
-PASSWORD = 'test'
+if load_settings:
+	USERNAME = load_settings[-1].Username
+	PASSWORD = load_settings[-1].Password
+else:
+	USERNAME = 'test'
+	PASSWORD = 'test'
 
 #API
 api.add_resource(ItemResource,"/api/<item_id>")
@@ -36,4 +43,4 @@ def index():
 
 if __name__ == '__main__':
     app.config["SECRET_KEY"] = "ITSASECRET"
-    app.run(port=5000,debug=True)
+    app.run(port=5000,host="0.0.0.0",debug=True)
